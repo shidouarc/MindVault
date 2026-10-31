@@ -1,0 +1,185 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Inter:Bold';
+  src: url('https://static.figma.com/font/Inter_1') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Inter:Regular';
+  src: url('https://static.figma.com/font/Inter_1') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+
+@theme {
+  --font-sans: 'Inter:Regular', Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    background: #050610;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100dvh;
+    overflow: hidden;
+    background: #050610;
+    font-family: 'Inter:Regular', Inter, ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: rgba(139, 92, 246, 0.35);
+    color: white;
+  }
+
+  * {
+    scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+    scrollbar-width: thin;
+  }
+}
+
+.cosmic-field {
+  background:
+    linear-gradient(rgba(3, 4, 14, 0.08), rgba(3, 4, 14, 0.22)),
+    url('/assets/cosmic-reference.png') center / cover no-repeat;
+  background-size:
+    auto,
+    cover;
+  filter: saturate(0.92) contrast(1.04) brightness(0.66);
+  transform: scale(1.01);
+}
+
+.cosmic-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.76;
+  filter: saturate(0.88) contrast(1.06) brightness(0.58);
+  transform: scale(1.01);
+}
+
+.cosmic-nebula {
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(255, 142, 37, 0.08), transparent 24%),
+    radial-gradient(ellipse at 78% 72%, rgba(0, 168, 151, 0.08), transparent 30%),
+    radial-gradient(ellipse at 22% 76%, rgba(88, 45, 150, 0.08), transparent 25%),
+    conic-gradient(
+      from 210deg at 52% 52%,
+      transparent,
+      rgba(255, 107, 30, 0.025),
+      transparent 32%,
+      rgba(16, 145, 169, 0.03),
+      transparent 66%
+    );
+  filter: saturate(1.35);
+  animation: nebula-breathe 12s ease-in-out infinite alternate;
+}
+
+.cosmic-vignette {
+  z-index: 1;
+  background:
+    radial-gradient(circle at center, transparent 38%, rgba(2, 2, 9, 0.18) 76%, rgba(2, 2, 8, 0.48)),
+    linear-gradient(to bottom, rgba(5, 6, 16, 0.18), transparent 20%, transparent 78%, rgba(5, 6, 16, 0.4));
+}
+
+@keyframes nebula-breathe {
+  to {
+    opacity: 0.74;
+    transform: scale(1.035) rotate(0.4deg);
+  }
+}
+
+.neural-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black, transparent 72%);
+}
+
+.logo-mark {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(177, 130, 255, 0.32);
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(160, 91, 255, 0.2), rgba(39, 207, 255, 0.05));
+  color: #bd95ff;
+  box-shadow:
+    inset 0 0 14px rgba(132, 77, 255, 0.12),
+    0 0 18px rgba(132, 77, 255, 0.08);
+}
+
+.glass-control {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(10, 11, 24, 0.68);
+  color: rgba(255, 255, 255, 0.65);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
+    0 12px 38px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px);
+}
+
+.stat-card {
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 14px;
+  background: rgba(9, 10, 23, 0.68);
+  padding: 13px 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
+    0 16px 45px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(18px);
+}
+
+.detail-panel {
+  animation: detail-in 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes detail-in {
+  from {
+    opacity: 0;
+    transform: translateX(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@media (max-width: 1023px) {
+  .detail-panel {
+    max-height: min(58dvh, 520px);
+    animation-name: detail-up;
+  }
+
+  @keyframes detail-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-video {
+    display: none;
+  }
+}
